@@ -20,8 +20,12 @@ class WechatInterfaceView(View):
 
         # 验证是否来自微信服务器
         wechat = WechatBasic(token=token)
-        print('come from wechat')
-        if wechat.check_signature(signature=signature, timestamp=timestamp, nonce=nonce):
+        if wechat.check_signature(
+                signature=signature,
+                timestamp=timestamp,
+                nonce=nonce
+                ):
+            print('come from wechat')
             return HttpResponse(echostr)
         print('not come from wechat')
         return HttpResponse()
