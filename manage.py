@@ -2,6 +2,10 @@
 import os
 import sys
 
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.local")
+
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wechat.settings")
 
