@@ -3,6 +3,8 @@
 from __future__ import print_function, unicode_literals
 from django.views.generic.base import View
 from django.http import HttpResponse
+# from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import csrf_protect
 from wechat_sdk import WechatBasic
 
 
@@ -17,21 +19,54 @@ class WechatInterfaceView(View):
         nonce = data.get('nonce')
         echostr = data.get('echostr')
 
-        # 验证是否来自微信服务器
         wechat = WechatBasic(token=token)
-        if wechat.check_signature(
+
+        # 验证是否来自微信服务器
+        if not wechat.check_signature(
                 signature=signature,
                 timestamp=timestamp,
                 nonce=nonce
                 ):
-            print('come from wechat')
-            return HttpResponse(echostr)
-        print('not come from wechat')
-        return HttpResponse('')
+            print('not come from wechat')
+            return HttpResponse('')
+
+        return HttpResponse(echostr)
 
     def post(self, request, *args, **kwargs):
         '''微信平台向服务器发送消息'''
-        print('kwargs, ', kwargs)
-        print('args, ', args)
-        print('request.body, ', request.body)
-        return HttpResponse('')
+        token = kwargs.get('token')
+        data = request.GET
+        signature = data.get('signature')
+        timestamp = data.get('timestamp')
+        nonce = data.get('nonce')
+        
+        wechat = WechatBasic(token=token)
+
+        # 验证是否来自微信服务器
+        if not wechat.check_signature(
+                signature=signature,
+                timestamp=timestamp,
+                nonce=nonce
+                ):
+            print('not come from wechat')
+            return HttpResponse('')
+        
+        # 测试回复
+        wechat.parse_data(request.body)
+        message = wechat.get_message()
+
+        print('message_type, ', message.type)
+
+        # 文本消息
+        if message.type == 'text':
+            res = wechat.response_text('你真幽默')
+
+        # 图片消息
+        elif message.type == 'image':
+            res = wechat.response_text('你真逗')
+
+        # 其他
+        else:
+            res = ''
+
+        return HttpResponse(res)
