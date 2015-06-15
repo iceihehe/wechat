@@ -12,7 +12,6 @@ class WechatInterfaceView(View):
         '''微信平台修改服务器地址时用'''
         token = kwargs.get('token')
         data = request.GET
-        print('token, ', token)
         signature = data.get('signature')
         timestamp = data.get('timestamp')
         nonce = data.get('nonce')
@@ -29,3 +28,9 @@ class WechatInterfaceView(View):
             return HttpResponse(echostr)
         print('not come from wechat')
         return HttpResponse()
+
+    def post(self, request, *args, **kwargs):
+        '''微信平台向服务器发送消息'''
+        print('kwargs, ', kwargs)
+        print('args, ', args)
+        print('request.body, ', request.body)
