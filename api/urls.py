@@ -5,6 +5,6 @@ from views import views
 
 urlpatterns = patterns(
     '',
-    url(r'(?P<uid>\w+)/$', views.WechatInterfaceView.as_view()),
+    url(r'(?P<token>\w+)/$', views.WechatInterfaceView.as_view()),
 
 )
