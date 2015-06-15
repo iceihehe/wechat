@@ -27,10 +27,11 @@ class WechatInterfaceView(View):
             print('come from wechat')
             return HttpResponse(echostr)
         print('not come from wechat')
-        return HttpResponse()
+        return HttpResponse('')
 
     def post(self, request, *args, **kwargs):
         '''微信平台向服务器发送消息'''
         print('kwargs, ', kwargs)
         print('args, ', args)
         print('request.body, ', request.body)
+        return HttpResponse('')
