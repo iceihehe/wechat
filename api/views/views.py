@@ -55,7 +55,7 @@ class WechatInterfaceView(View):
         wechat.parse_data(request.body)
         message = wechat.get_message()
 
-        print('message_type, ', message.type)
+        print(request.body)
 
         # 文本消息
         if message.type == 'text':
