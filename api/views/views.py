@@ -7,6 +7,7 @@ from django.http import HttpResponse
 # from django.views.decorators.csrf import csrf_protect
 # from wechat_sdk import WechatBasic
 from wechat_extend import WechatExtend
+from api.tools.process import LocationProcessor
 
 
 class WechatInterfaceView(View):
@@ -52,22 +53,17 @@ class WechatInterfaceView(View):
             print('Not come from wechat')
             return HttpResponse('')
 
-        # 测试回复
+        # 解析xml
         wechat.parse_data(request.body)
         message = wechat.get_message()
 
         print(request.body)
 
+        # 地址消息
+        if message.type == 'location':
+            LocationProcessor.process(wechat, message)
         # 文本消息
         if message.type == 'text':
             res = wechat.response_text('你真幽默')
-
-        # 图片消息
-        elif message.type == 'image':
-            res = wechat.response_text('你真逗')
-
-        # 其他
-        else:
-            res = '呵呵'
 
         return HttpResponse(res)
