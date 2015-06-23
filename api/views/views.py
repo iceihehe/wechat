@@ -27,7 +27,7 @@ class WechatInterfaceView(View):
                 timestamp=timestamp,
                 nonce=nonce
                 ):
-            print('not come from wechat')
+            print('Not come from wechat')
             return HttpResponse('')
 
         return HttpResponse(echostr)
@@ -39,7 +39,7 @@ class WechatInterfaceView(View):
         signature = data.get('signature')
         timestamp = data.get('timestamp')
         nonce = data.get('nonce')
-        
+
         wechat = WechatBasic(token=token)
 
         # 验证是否来自微信服务器
@@ -48,9 +48,9 @@ class WechatInterfaceView(View):
                 timestamp=timestamp,
                 nonce=nonce
                 ):
-            print('not come from wechat')
+            print('Not come from wechat')
             return HttpResponse('')
-        
+
         # 测试回复
         wechat.parse_data(request.body)
         message = wechat.get_message()
@@ -67,6 +67,6 @@ class WechatInterfaceView(View):
 
         # 其他
         else:
-            res = ''
+            res = '呵呵'
 
         return HttpResponse(res)
