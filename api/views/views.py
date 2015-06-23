@@ -58,6 +58,7 @@ class WechatInterfaceView(View):
         message = wechat.get_message()
 
         print(request.body)
+        print('type: ', message.type)
 
         # 地址消息
         if message.type == 'location':

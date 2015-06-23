@@ -9,7 +9,7 @@ class TextProcessor(object):
     '''
     处理文本消息
     '''
-    @classmethod
+    @staticmethod
     def process(wechat, message):
         pass
 
@@ -18,6 +18,6 @@ class LocationProcessor(object):
     '''
     处理地理位置消息
     '''
-    @classmethod
+    @staticmethod
     def process(wechat, message):
-        print('wechat: ', wechat)
+        print('nice')
