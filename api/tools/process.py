@@ -4,6 +4,8 @@
 
 from __future__ import print_function, unicode_literals
 
+from api.models.models import Followers
+
 
 class TextProcessor(object):
     '''
@@ -20,4 +22,10 @@ class LocationProcessor(object):
     '''
     @staticmethod
     def process(wechat, message):
-        print('nice')
+        longitude = message.longitude
+        latitude = message.latitude
+        Followers.objects(user_id=message.source).update_one(
+            upsert=True,
+            set__longitude=longitude,
+            set__latitude=latitude
+        )
