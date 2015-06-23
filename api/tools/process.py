@@ -25,14 +25,14 @@ class LocationProcessor(object):
         longitude = message.longitude
         latitude = message.latitude
         precision = message.precision
-
+        '''
         location = Location(
             longitude=longitude,
             latitude=latitude,
             precision=precision
         )
-
+        '''
         Followers.objects(user_id=message.source).update_one(
             upsert=True,
-            set__location=location
+            set__location=Location(longitude, latitude, precision)
         )
