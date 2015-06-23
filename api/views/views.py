@@ -5,7 +5,8 @@ from django.views.generic.base import View
 from django.http import HttpResponse
 # from django.utils.decorators import method_decorator
 # from django.views.decorators.csrf import csrf_protect
-from wechat_sdk import WechatBasic
+# from wechat_sdk import WechatBasic
+from wechat_extend import WechatExtend
 
 
 class WechatInterfaceView(View):
@@ -19,7 +20,7 @@ class WechatInterfaceView(View):
         nonce = data.get('nonce')
         echostr = data.get('echostr')
 
-        wechat = WechatBasic(token=token)
+        wechat = WechatExtend(token=token)
 
         # 验证是否来自微信服务器
         if not wechat.check_signature(
@@ -40,7 +41,7 @@ class WechatInterfaceView(View):
         timestamp = data.get('timestamp')
         nonce = data.get('nonce')
 
-        wechat = WechatBasic(token=token)
+        wechat = WechatExtend(token=token)
 
         # 验证是否来自微信服务器
         if not wechat.check_signature(

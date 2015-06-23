@@ -10,4 +10,4 @@ import abc
 
 
 class MessageProcessor(object):
-    __meta__ = abc.ABCMeta
+    __metaclass__ = abc.ABCMeta
