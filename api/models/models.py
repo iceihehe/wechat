@@ -1,3 +1,11 @@
-from django.db import models
+# -*- coding=utf-8 -*-
 
-# Create your models here.
+from mongoengine import Document, StringField
+
+
+class Followers(Document):
+    '''关注的人'''
+    # 微信号
+    user_id = StringField()
+    # 地理位置
+    location = StringField()
