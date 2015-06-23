@@ -1,10 +1,10 @@
 # -*- coding=utf-8 -*-
 
 from mongoengine import Document, StringField, FloatField,\
-    EmbededDocumentField, EmbededDocument
+    EmbeddedDocumentField, EmbeddedDocument
 
 
-class Location(EmbededDocument):
+class Location(EmbeddedDocument):
     '''地理位置'''
     # 经度
     longitude = FloatField()
@@ -19,4 +19,4 @@ class Followers(Document):
     # 微信号
     user_id = StringField()
     # 地理位置
-    location = EmbededDocumentField(Location)
+    location = EmbeddedDocumentField(Location)
