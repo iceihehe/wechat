@@ -4,7 +4,7 @@
 
 from __future__ import print_function, unicode_literals
 
-from api.models.models import Follower, Location, Response
+from api.models.models import Follower, Response
 
 
 class TextProcessor(object):
@@ -13,7 +13,9 @@ class TextProcessor(object):
     '''
     @classmethod
     def process(cls, wechat, message):
-        response = Response.objects(keyword_list__in=[message.content])
+        # 如果关键词有重复的，取最新添加的
+        response = Response.objects(keyword_list__in=[message.content])\
+            .order_by('-id')
         if response:
             return wechat.response_text(response.first().res)
         return wechat.response_text('你在说什么')
