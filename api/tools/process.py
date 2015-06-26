@@ -26,13 +26,32 @@ class LocationProcessor(object):
     '''
     @classmethod
     def process(cls, wechat, message):
-        longitude = message.longitude
-        latitude = message.latitude
-        precision = message.precision
-        Follower.objects(user_id=message.source).update_one(
-            upsert=True,
-            set__location=Location(longitude=longitude, latitude=latitude, precision=precision)
-        )
+        source = message.source
+        # 上报地理位置
+        try:
+            longitude = message.longitude
+            latitude = message.latitude
+            precision = message.precision
+            Follower.objects(user_id=source).update_one(
+                upsert=True,
+                set__user_id=source,
+                set__location__latitude=latitude,
+                set__location__longitude=longitude,
+                set__location__precision=precision,
+            )
+        # 地理位置消息
+        except:
+            latitude, longitude = message.location
+            scale = message.scale
+            label = message.label
+            Follower.objects(user_id=source).update_one(
+                upsert=True,
+                set__user_id=source,
+                set__location__label=label,
+                set__location__scale=scale,
+                set__location__latitude=latitude,
+                set__location__longitude=longitude,
+            )
 
 
 class SubscribeProcessor(object):

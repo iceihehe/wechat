@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from mongoengine import Document, StringField, FloatField,\
+from mongoengine import Document, StringField, FloatField, IntField,\
     EmbeddedDocumentField, EmbeddedDocument
 
 
@@ -12,6 +12,10 @@ class Location(EmbeddedDocument):
     latitude = FloatField()
     # 精度
     precision = FloatField()
+    # 缩放大小
+    scale = IntField()
+    # 地理位置信息
+    label = StringField()
 
 
 class Follower(Document):
