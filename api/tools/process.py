@@ -66,3 +66,14 @@ class SubscribeProcessor(object):
             set__user_id=message.source
         )
         return wechat.response_text('欢迎加入， 你个逗比')
+
+
+class ClickProcessor(object):
+    '''
+    处理点击事件
+    '''
+    @classmethod
+    def process(cls, wechat, message):
+        print('key: ', message.key)
+        if message.key == 'weather':
+            pass
