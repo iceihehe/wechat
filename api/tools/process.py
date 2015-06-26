@@ -96,7 +96,7 @@ class ClickProcessor(object):
                     'value': results['results'][0]['currentCity']
                     },
                 'date': {
-                    'value': results['date'],
+                    'value': results['results'][0]['weather_data'][0]['date'],
                     },
                 'weather': {
                     'value': results['results'][0]['weather_data'][0]['weather'],
@@ -114,7 +114,8 @@ class ClickProcessor(object):
             wechat.send_template_message(
                 user_id=message.source,
                 template_id=TEMPLATE_ID['weather'],
-                data=data
+                data=data,
+                url="http://104.236.136.36/weather?location=" + ll
             )
             return ''
         return wechat.response_text('tm的出错了')

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1.0,maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+
+<title>天气</title>
+<style type="text/css">
+body{
+    font-size:0.8rem;
+}
+table{
+    width:98%;
+    margin-left:1%;
+    border-collapse:collapse;
+}
+.time,
+.temperature{
+    width:30%;
+}
+table th{
+    background-color:lightblue;
+    padding:0.5rem 0;
+    text-align:center;
+}
+table td{
+    padding:0.5rem; 
+    text-align:center;
+}
+</style>
+<body>
+<h2>城市: {{ results.results.0.currentCity }}</h2>
+<table style="width:98%;margin-left:1%;">
+    <tr>
+        <th class="time">时间</th>
+        <th>天气状况</th>
+        <th class="temperature">温度</th>
+        <th>风力</th>
+        <th>pm2.5</th>
+    </tr>
+{% for result in results.results.0.weather_data %}
+    <tr>
+        <td>{{ result.date }}</td>
+        <td>{{ result.weather }}</td>
+        <td>{{ result.temperature }}</td>
+        <td>{{ result.wind }}</td>
+        <td>{{ results.results.0.pm25 }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+
+</body>
+</html>

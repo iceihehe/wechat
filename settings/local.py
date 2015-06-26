@@ -51,6 +51,9 @@ ROOT_URLCONF = 'wechat.urls'
 
 WSGI_APPLICATION = 'wechat.wsgi.application'
 
+TEMPLATE_DIRS = (
+    "wechat/template"
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
