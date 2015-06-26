@@ -4,3 +4,5 @@
 
 AppID = "wx2102221b928b1121"
 AppSecret = "9606385cb216b2478e098de47e3f869d"
+
+AK = "PtRk7kCwLoZwRZYkgbsp0IOr"
