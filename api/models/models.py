@@ -14,9 +14,21 @@ class Location(EmbeddedDocument):
     precision = FloatField()
 
 
-class Followers(Document):
+class Follower(Document):
     '''关注的人'''
     # 微信号
     user_id = StringField()
     # 地理位置
     location = EmbeddedDocumentField(Location)
+
+
+class Response(Document):
+    '''
+    关键词回复
+    暂时没有素材
+    全是文字回复
+    '''
+    # 关键词
+    keyword = StringField()
+    # 回复
+    res = StringField()
