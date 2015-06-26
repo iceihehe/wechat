@@ -31,6 +31,7 @@ class BaiduBasic(object):
             params={
                 'ak': self.__ak,
                 'location': location,
+                'output': 'json',
             }
         )
 

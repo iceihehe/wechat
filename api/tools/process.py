@@ -5,6 +5,8 @@
 from __future__ import print_function, unicode_literals
 
 from api.models.models import Follower, Response
+from baidu_extend.basic import BaiduBasic
+from const import TEMPLATE_ID, AK
 
 
 class TextProcessor(object):
@@ -74,6 +76,45 @@ class ClickProcessor(object):
     '''
     @classmethod
     def process(cls, wechat, message):
-        print('key: ', message.key)
         if message.key == 'weather':
-            pass
+            try:
+                user = Follower.objects(user_id=message.source).first()
+                location = user.location
+            except:
+                return wechat.response_text('先发送地理位置噻')
+            # 来自百度天气的数据
+            baidu = BaiduBasic(ak=AK)
+            ll = "%s,%s" % (location.longitude, location.latitude)
+            print("location: ", ll)
+            try:
+                results = baidu.get_weather(ll)
+            except:
+                return wechat.response_text('你跑火星去了说')
+
+            data = {
+                'city': {
+                    'value': results['results'][0]['currentCity']
+                    },
+                'date': {
+                    'value': results['date'],
+                    },
+                'weather': {
+                    'value': results['results'][0]['weather_data'][0]['weather'],
+                    },
+                'temp': {
+                    'value': results['results'][0]['weather_data'][0]['temperature'],
+                    },
+                'wind': {
+                    'value': results['results'][0]['weather_data'][0]['wind'],
+                    },
+                'pm25': {
+                    'value': results['results'][0]['pm25'],
+                    },
+            }
+            wechat.send_template_message(
+                user_id=message.source,
+                template_id=TEMPLATE_ID['weather'],
+                data=data
+            )
+            return ''
+        return wechat.response_text('tm的出错了')

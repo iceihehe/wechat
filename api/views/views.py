@@ -75,6 +75,6 @@ class WechatInterfaceView(View):
             res = TextProcessor.process(wechat, message)
         # 点击事件
         if message.type == 'click':
-            ClickProcessor.process(wechat, message)
+            res = ClickProcessor.process(wechat, message)
 
         return HttpResponse(res)
