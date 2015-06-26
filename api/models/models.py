@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from mongoengine import Document, StringField, FloatField, IntField,\
+from mongoengine import Document, StringField, FloatField, IntField, ListField,\
     EmbeddedDocumentField, EmbeddedDocument
 
 
@@ -33,6 +33,6 @@ class Response(Document):
     全是文字回复
     '''
     # 关键词
-    keyword = StringField()
+    keyword_list = ListField(StringField())
     # 回复
     res = StringField()

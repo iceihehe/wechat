@@ -13,8 +13,7 @@ class TextProcessor(object):
     '''
     @classmethod
     def process(cls, wechat, message):
-        print('hehe')
-        response = Response.objects(keyword=message.content)
+        response = Response.objects(keyword_list__in=[message.content])
         if response:
             return wechat.response_text(response.first().res)
         return wechat.response_text('你在说什么')
