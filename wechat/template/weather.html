@@ -39,7 +39,6 @@ table td{
         <th>天气状况</th>
         <th class="temperature">温度</th>
         <th>风力</th>
-        <th>pm2.5</th>
     </tr>
 {% for result in results.results.0.weather_data %}
     <tr>
@@ -47,7 +46,6 @@ table td{
         <td>{{ result.weather }}</td>
         <td>{{ result.temperature }}</td>
         <td>{{ result.wind }}</td>
-        <td>{{ results.results.0.pm25 }}</td>
     </tr>
 {% endfor %}
 </table>
