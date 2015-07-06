@@ -6,7 +6,7 @@ from __future__ import print_function, unicode_literals
 
 from api.models.models import Follower, Response
 from baidu_extend.basic import BaiduBasic
-from const import TEMPLATE_ID, AK
+from const import TEMPLATE_ID, ak
 
 
 class TextProcessor(object):
@@ -83,7 +83,7 @@ class ClickProcessor(object):
             except:
                 return wechat.response_text('先发送地理位置噻')
             # 来自百度天气的数据
-            baidu = BaiduBasic(ak=AK)
+            baidu = BaiduBasic(ak=ak)
             ll = "%s,%s" % (location.longitude, location.latitude)
             print("location: ", ll)
             try:

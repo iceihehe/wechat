@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from wechat_extend import WechatExtend
 from api.tools.process import LocationProcessor, SubscribeProcessor,\
     TextProcessor, ClickProcessor
-from const import AppID, AppSecret
+from const import appid, appsecret
 
 
 class WechatInterfaceView(View):
@@ -44,7 +44,9 @@ class WechatInterfaceView(View):
         timestamp = data.get('timestamp')
         nonce = data.get('nonce')
 
-        wechat = WechatExtend(token=token, appid=AppID, appsecret=AppSecret)
+        wechat = WechatExtend(token=token, appid=appid, appsecret=appsecret)
+        request.session['token'] = token
+        print(token)
 
         # 验证是否来自微信服务器
         if not wechat.check_signature(
