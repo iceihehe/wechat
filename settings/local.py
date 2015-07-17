@@ -88,6 +88,7 @@ STATIC_URL = '/static/'
 from mongoengine import connect
 
 connect('wechat', host='mongodb://mongo/wechat')
+# connect('wechat')
 
 
 LOGGING = {
@@ -113,7 +114,6 @@ LOGGING = {
         },
     }
 }
-
 SESSION_ENGINE = 'mongoengine.django.sessions'
 SESSION_COOKIE_NAME = 'sid'
 SESSION_COOKIE_AGE = 7200
