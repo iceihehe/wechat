@@ -52,7 +52,7 @@ ROOT_URLCONF = 'wechat.urls'
 WSGI_APPLICATION = 'wechat.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "wechat/template"
+    "wechat/template", 
 )
 
 # Database
@@ -87,7 +87,7 @@ STATIC_URL = '/static/'
 
 from mongoengine import connect
 
-connect('wechat')
+connect('wechat', host='mongodb://mongo/wechat')
 
 
 LOGGING = {
