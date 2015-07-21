@@ -87,7 +87,7 @@ STATIC_URL = '/static/'
 
 from mongoengine import connect
 
-connect('wechat', host='mongodb://mongo/wechat')
+connect('wechat', host='mongo')
 # connect('wechat')
 
 
