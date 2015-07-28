@@ -21,7 +21,7 @@ class Location(EmbeddedDocument):
 class Follower(Document):
     '''关注的人'''
     # 微信号
-    user_id = StringField()
+    openid = StringField()
     # 地理位置
     location = EmbeddedDocumentField(Location)
 

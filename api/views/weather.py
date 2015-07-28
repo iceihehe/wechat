@@ -44,7 +44,7 @@ class IndexView(View):
                     'lang': 'zh_CN',
                 }
             )
-            Follower.objects(user_id=r1.json()['openid']).update_one(
+            Follower.objects(openid=r1.json()['openid']).update_one(
                 upsert=True,
             )
         return render(request, 'weather.html', {'results': results})

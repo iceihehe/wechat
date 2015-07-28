@@ -35,9 +35,9 @@ class LocationProcessor(object):
             longitude = message.longitude
             latitude = message.latitude
             precision = message.precision
-            Follower.objects(user_id=source).update_one(
+            Follower.objects(openid=source).update_one(
                 upsert=True,
-                set__user_id=source,
+                set__openid=source,
                 set__location__latitude=latitude,
                 set__location__longitude=longitude,
                 set__location__precision=precision,
@@ -47,9 +47,9 @@ class LocationProcessor(object):
             latitude, longitude = message.location
             scale = message.scale
             label = message.label
-            Follower.objects(user_id=source).update_one(
+            Follower.objects(openid=source).update_one(
                 upsert=True,
-                set__user_id=source,
+                set__openid=source,
                 set__location__label=label,
                 set__location__scale=scale,
                 set__location__latitude=latitude,
@@ -63,9 +63,9 @@ class SubscribeProcessor(object):
     '''
     @classmethod
     def process(cls, wechat, message):
-        Follower.objects(user_id=message.source).update_one(
+        Follower.objects(openid=message.source).update_one(
             upsert=True,
-            set__user_id=message.source
+            set__openid=message.source
         )
         return wechat.response_text('欢迎加入， 你个逗比')
 
@@ -78,7 +78,7 @@ class ClickProcessor(object):
     def process(cls, wechat, message):
         if message.key == 'weather':
             try:
-                user = Follower.objects(user_id=message.source).first()
+                user = Follower.objects(openid=message.source).first()
                 location = user.location
             except:
                 return wechat.response_text('先发送地理位置噻')
