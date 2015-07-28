@@ -115,7 +115,7 @@ class ClickProcessor(object):
                 user_id=message.source,
                 template_id=TEMPLATE_ID['weather'],
                 data=data,
-                url="http://104.236.136.36/weather?location=" + ll
+                url="http://%s/weather?location=%s" % (request.META['HTTP_HOST'], ll)
             )
             return ''
         return wechat.response_text('tm的出错了')

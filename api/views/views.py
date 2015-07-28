@@ -24,6 +24,7 @@ class WechatInterfaceView(View):
         echostr = data.get('echostr')
 
         wechat = WechatExtend(token=token)
+        print(request.META['HTTP_HOST'])
 
         # 验证是否来自微信服务器
         if not wechat.check_signature(
@@ -46,7 +47,6 @@ class WechatInterfaceView(View):
 
         wechat = WechatExtend(token=token, appid=appid, appsecret=appsecret)
         request.session['token'] = token
-        print(token)
 
         # 验证是否来自微信服务器
         if not wechat.check_signature(

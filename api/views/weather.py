@@ -19,6 +19,7 @@ class IndexView(View):
     天气列表
     '''
     def get(self, request, *args, **kwargs):
+        print('token', request.session.get('token'))
         location = request.GET.get('location')
         baidu = BaiduBasic(ak=ak)
         results = baidu.get_weather(location)
