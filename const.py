@@ -10,3 +10,5 @@ ak = "PtRk7kCwLoZwRZYkgbsp0IOr"
 TEMPLATE_ID = {
     "weather": "vHuZg3xqJBu_j7pu0ug4B8hQL7UdK4Pc9-i7_86LwKY",
 }
+
+HTTP_HOST = '45.55.5.149'

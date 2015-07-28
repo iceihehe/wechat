@@ -6,7 +6,7 @@ from __future__ import print_function, unicode_literals
 
 from api.models.models import Follower, Response
 from baidu_extend.basic import BaiduBasic
-from const import TEMPLATE_ID, ak
+from const import TEMPLATE_ID, ak, HTTP_HOST
 
 
 class TextProcessor(object):
@@ -115,7 +115,7 @@ class ClickProcessor(object):
                 user_id=message.source,
                 template_id=TEMPLATE_ID['weather'],
                 data=data,
-                url="http://%s/weather?location=%s" % (request.META['HTTP_HOST'], ll)
+                url="http://%s/weather?location=%s" % (HTTP_HOST, ll)
             )
             return ''
         return wechat.response_text('tm的出错了')
